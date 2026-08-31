@@ -1,0 +1,36 @@
+<?php
+declare(strict_types=1);
+
+/**
+ * Database connection for the attendance app.
+ * include this at the top of every API endpoint: require __DIR__ . '/db.php';
+ * It exposes a ready-to-use $pdo handle, or exits with a JSON 500 on failure.
+ */
+
+// Prefer environment variables (set them in your Apache vhost or a .env
+// loader); the fallbacks let this run immediately for the 48-hour build.
+$host = getenv('DB_HOST') ?: '127.0.0.1';
+$db   = getenv('DB_NAME') ?: 'attendance_app';
+$user = 'attendance_app';
+$pass = 'YOUR_PASSWORD_HERE';
+$charset = 'utf8mb4';
+
+$dsn = "mysql:host={$host};dbname={$db};charset={$charset}";
+
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false, // use real prepared statements
+];
+
+try {
+    $pdo = new PDO($dsn, $user, $pass, $options);
+} catch (PDOException $e) {
+    // Log the real error server-side; never expose it to the client —
+    // it can leak hostnames, usernames, or schema details.
+    error_log('[attendance-app] DB connection failed: ' . $e->getMessage());
+    http_response_code(500);
+    header('Content-Type: application/json');
+    echo json_encode(['error' => 'Database connection failed']);
+    exit;
+}

@@ -1,0 +1,75 @@
+======================================================
+ 1. NODE / NPM
+======================================================
+  [PASS] node found: v24.20.0 at /home/dunni/.nvm/versions/node/v24.20.0/bin/node
+  [PASS] npm found: 11.19.0 at /home/dunni/.nvm/versions/node/v24.20.0/bin/npm
+  -- checking for conflicting apt-installed node/npm packages --
+ii  nodejs                                     20.20.2-1nodesource1                             amd64        Node.js event-based server-side javascript engine
+  -- every 'node' executable currently on PATH --
+node is /home/dunni/.nvm/versions/node/v24.20.0/bin/node
+node is /usr/bin/node
+node is /bin/node
+
+======================================================
+ 2. PROJECT: /home/dunni/Projects/attendance-app
+======================================================
+  [PASS] project directory exists
+  [PASS] package.json found
+  --- devDependencies (raw) ---
+{
+  "@eslint/js": "^10.0.1",
+  "@types/react": "^19.2.18",
+  "@types/react-dom": "^19.2.4",
+  "@vitejs/plugin-react": "^6.1.0",
+  "autoprefixer": "^10.5.4",
+  "eslint": "^10.9.0",
+  "eslint-plugin-react-hooks": "^7.1.1",
+  "eslint-plugin-react-refresh": "^0.5.4",
+  "globals": "^17.11.0",
+  "postcss": "^8.5.26",
+  "tailwindcss": "^4.3.3",
+  "vite": "^8.2.2"
+}
+  --- dependencies (raw) ---
+{
+  "react": "^19.2.8",
+  "react-dom": "^19.2.8"
+}
+  [PASS] node_modules exists
+  --- tailwindcss install check (this is the key diagnostic) ---
+  [INFO] installed tailwindcss version: 4.3.3
+  [INFO] tailwindcss package.json 'bin' field: null
+  [FAIL] this tailwindcss version ships NO CLI binary -> explains 'could not determine executable to run'
+  --- tailwind-related binaries actually present in node_modules/.bin ---
+  [INFO] none found
+
+======================================================
+ 3. APACHE2
+======================================================
+  [PASS] apache2 service is active
+  [PASS] apache2 enabled on boot
+  --- HTTP check ---
+HTTP/1.1 200 OK
+
+======================================================
+ 4. MYSQL
+======================================================
+  [FAIL] mysql service is NOT active
+mysql  Ver 8.0.46-0ubuntu0.24.04.3 for Linux on x86_64 ((Ubuntu))
+  --- connection test (may prompt for sudo password) ---
+sudo: a terminal is required to read the password; either use the -S option to read from standard input or configure an askpass helper
+sudo: a password is required
+
+======================================================
+ 5. PHP
+======================================================
+  [PASS] php CLI found: PHP 8.3.6 (cli) (built: Jul 16 2026 18:30:41) (NTS)
+  --- pdo_mysql extension (CLI) ---
+PDO
+pdo_mysql
+  --- apache php module ---
+  [FAIL] php module not loaded in apache2
+
+======================================================
+ DONE. Paste this full output back if anything shows [FAIL].
+======================================================
